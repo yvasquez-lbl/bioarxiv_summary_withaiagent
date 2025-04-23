@@ -5,7 +5,7 @@ This is a temporary code with an ai agent needed to be a NeLLi Research assistan
 
 Currently this code has a lot of requirements, including a cborg api key needed. If run locally, then that would remove the need for a cborg api key.
 
-It can also only find one paper. To see this paper use the command:
+It can also only find one paper. To see this paper use the command: /n
 ```find paper from [author last name only] from April 1st, 2025 to April 1st, 2025.```
 
 You can then use this paper to summarize it into a 300 word bluesky post. 
