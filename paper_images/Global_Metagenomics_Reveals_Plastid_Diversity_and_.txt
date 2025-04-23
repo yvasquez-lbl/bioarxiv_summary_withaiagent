@@ -1,0 +1,31 @@
+Image prompt for: Global Metagenomics Reveals Plastid Diversity and Unexplored Algal Lineages
+
+Here is a detailed image generation prompt that captures the essence of the scientific paper:
+
+**Prompt:**
+
+"Create a visually striking illustration that represents the diversity and evolution of plastids in eukaryotic organisms. 
+
+In the center of the image, depict a large, stylized cyanobacterium with a bright blue-green color, surrounded by a series of concentric circles or spirals that represent the primary endosymbiosis event that gave rise to plastids.
+
+Radiating outward from the cyanobacterium, illustrate several distinct lineages of eukaryotic organisms, each with their own unique plastid types. These lineages should include:
+
+* Archaeplastida (represented by a green plant or algal cell with a primary plastid)
+* CASH lineages (represented by a diverse array of protist cells, including cryptophytes, alveolates, stramenopiles, and haptophytes, each with their own secondary plastids)
+
+Incorporate several stylized, abstract representations of plastid sequences, including:
+
+* A spiral or helical structure that represents the 1,027 plastid sequences captured in the metagenomics study
+* A series of branching lines or curves that symbolize the novel sequences and new lineages discovered in the study
+
+Use a color scheme that reflects the diversity of plastid types, with shades of green, blue, and red representing different plastid lineages. Incorporate subtle gradient effects to convey the evolutionary relationships between the different lineages.
+
+In the background, include a subtle representation of a global, oceanic environment, such as a stylized map or a series of interconnected oceanic spheres, to reflect the global metagenomics approach used in the study.
+
+The overall style should be modern, dynamic, and engaging, with clean lines, simple shapes, and a focus on visual storytelling. The image should be suitable for use in a scientific publication or presentation."
+
+**Image specifications:**
+
+* Image size: 1024 x 768 pixels
+* Color mode: RGB
+* Style: Scientific illustration, with a focus on visual storytelling and simplicity.

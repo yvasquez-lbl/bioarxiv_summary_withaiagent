@@ -4,6 +4,7 @@ import requests
 import re
 import json
 from typing import Dict, List
+from datetime import datetime
 
 # Initialize OpenAI with LBL specifics
 client = OpenAI(
@@ -14,8 +15,9 @@ client = OpenAI(
 model = "lbl/cborg-coder:latest"
 
 class PaperSummarizer:
-    def __init__(self, log_file: str = "paper_notifications.log"):
+    def __init__(self, log_file: str = "paper_notifications.log", summary_output_file: str = "summary_output.log"):
         self.log_file = log_file
+        self.summary_output_file = summary_output_file
         self.base_url = "https://api.biorxiv.org"
 
     def get_paper_by_doi(self, doi: str, server: str = "biorxiv") -> Dict:
@@ -107,6 +109,28 @@ Summary:"""
         except Exception as e:
             print(f"Error generating summary: {e}")
             return "Error generating summary"
+            
+    def log_summary_to_file(self, paper_data: Dict, summary: str):
+        """Log the paper summary to the summary output file"""
+        try:
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            
+            with open(self.summary_output_file, 'a') as f:
+                f.write(f"\n\n=== Paper Summary Generated at {timestamp} ===\n")
+                f.write("="*50 + "\n")
+                f.write(f"Title: {paper_data.get('title', 'No title')}\n")
+                f.write(f"DOI: {paper_data.get('doi', 'No doi')}\n")
+                f.write(f"Authors: {paper_data.get('authors', 'No authors')}\n")
+                f.write(f"Date: {paper_data.get('date', 'No date')}\n")
+                f.write(f"Category: {paper_data.get('category', 'No category')}\n")
+                f.write("\nSummary:\n")
+                f.write(summary + "\n")
+                f.write("="*50 + "\n")
+                
+            print(f"Summary logged to {self.summary_output_file}")
+            
+        except Exception as e:
+            print(f"Error logging summary to file: {e}")
 
     def process_log_file(self):
         """Read DOIs from log file and generate summaries"""
@@ -140,6 +164,9 @@ Summary:"""
                     print("\nSummary:")
                     print(summary)
                     print("="*80)
+                    
+                    # Log the summary to the output file
+                    self.log_summary_to_file(paper_data, summary)
                 else:
                     print(f"Could not fetch paper data for DOI: {doi}")
                     

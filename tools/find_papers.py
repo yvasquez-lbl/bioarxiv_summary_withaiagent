@@ -1,5 +1,4 @@
 import os
-import openai
 import numpy as np
 import requests
 import json
@@ -8,10 +7,7 @@ from typing import List, Dict, Optional
 import time
 import asyncio
 
-# Initialize OpenAI with LBL specifics
-#openai.api_key = os.environ.get('CBORG_API_KEY')
-#openai.base_url = "https://api.cborg.lbl.gov"
-#model = "lbl/llama"  # Make sure this is the correct model name
+
 
 class BiorxivAgent:
     def __init__(self, base_url: str = "https://api.biorxiv.org", log_file: str = "paper_notifications.log"):
@@ -137,6 +133,9 @@ class BiorxivAgent:
         
         print(f"\nSearching for papers by authors: {', '.join(target_authors)}")
         
+        # Normalize target authors for comparison
+        normalized_targets = [target.strip().lower() for target in target_authors]
+        
         for cursor in range(143, 146):
             papers_data = self.get_papers_by_date_range(start_date, end_date, cursor=cursor)
             collection = papers_data.get('collection', [])
@@ -160,7 +159,17 @@ class BiorxivAgent:
                 matching_authors = []
                 for author in authors:
                     author = author.strip()
-                    if any(target.strip() in author for target in target_authors):
+                    # Normalize author name for comparison
+                    normalized_author = author.lower()
+                    
+                    # Check for exact matches first
+                    if any(target == normalized_author for target in normalized_targets):
+                        matching_authors.append({
+                            'name': author,
+                            'affiliation': author_affiliations.get(author, "No affiliation listed")
+                        })
+                    # If no exact match, check for partial matches with more strict criteria
+                    elif any(target in normalized_author and len(target) > 5 for target in normalized_targets):
                         matching_authors.append({
                             'name': author,
                             'affiliation': author_affiliations.get(author, "No affiliation listed")
